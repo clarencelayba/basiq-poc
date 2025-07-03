@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Accounts</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-5">
+  <h2 class="mb-4">User Accounts</h2>
+
+  {% if accounts['data'] %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>Account Number</th>
+            <th>Account Name</th>
+            <th>Product Name</th>
+            <th>Balance</th>
+            <th>Currency</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for acc in accounts['data'] %}
+            <tr>
+              <td>{{ acc['accountNo'] }}</td>
+              <td>{{ acc.get('accountHolder', 'N/A') }}</td>
+              <td>{{ acc.get('name', 'N/A') }}</td>
+              <td>{{ acc['balance'] }}</td>
+              <td>{{ acc.get('currency', 'AUD') }}</td>
+              <td>{{ acc.get('status', 'active') }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning">No account data available for this user.</div>
+  {% endif %}
+
+  <a href="/" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</body>
+</html>
